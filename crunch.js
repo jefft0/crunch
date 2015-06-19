@@ -718,15 +718,21 @@ function Crunch (rawIn, rawOut) {
     var a = [],
         b = [10],
         z = [0],
+        n = '', 
         i = 0, q;
+
+    if (x.negative) {
+      n = '-';
+      x.negative = false;
+    }
 
     do {
       q      = x;
       x      = div(q, b);
       a[i++] = sub(q, mul(b, x)).pop();
     } while (cmp(x, z));
-
-    return a.reverse().join("");
+    
+    return n + a.reverse().join("");
   }
 
   function parse (s) {
@@ -1085,7 +1091,7 @@ function Crunch (rawIn, rawOut) {
      * @return {String} base 10 number as string
      */
     stringify: function (x) {
-      return stringify(ci(x));
+      return stringify(ci(x.slice()));
     },
 
     /**
